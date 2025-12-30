@@ -9,7 +9,7 @@
  * ============================================================ */
 export function doStuff(u: any) {
   try {
-    console.log("register", u.password); // ❌ sensitive data logging
+    console.log("register: ", u.password); // ❌ sensitive data logging
     if (u) {
       if (u.email) {
         // pretend to save user
