@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* warm cream / sage-olive palette */
+    --background: 48 29% 94%;
+    --foreground: 40 13% 19%;
+
+    --card: 46 40% 98%;
+    --card-foreground: 40 13% 19%;
+
+    --popover: 46 40% 98%;
+    --popover-foreground: 40 13% 19%;
+
+    /* muted olive / sage */
+    --primary: 72 13% 39%;
+    --primary-foreground: 48 40% 97%;
+
+    --secondary: 45 22% 89%;
+    --secondary-foreground: 40 13% 24%;
+
+    --muted: 45 20% 90%;
+    --muted-foreground: 40 8% 44%;
+
+    --accent: 46 24% 87%;
+    --accent-foreground: 40 13% 22%;
+
+    --destructive: 4 55% 51%;
+    --destructive-foreground: 48 40% 97%;
+
+    --border: 42 18% 84%;
+    --input: 42 18% 84%;
+    --ring: 72 13% 39%;
+
+    --radius: 1rem;
+
+    /* category colors — muted to suit the warm palette */
+    --category-study: #6f8caf;
+    --category-exercise: #7ba05b;
+    --category-work: #c39a4c;
+    --category-personal: #9a82b5;
+    --category-rest: #c98ba0;
+
+    /* mood colors */
+    --mood-1: #cf6b5e;
+    --mood-2: #d9925a;
+    --mood-3: #cdb15a;
+    --mood-4: #9bb061;
+    --mood-5: #7ba05b;
+  }
+
+  .dark {
+    --background: 40 8% 11%;
+    --foreground: 45 24% 91%;
+
+    --card: 40 8% 14%;
+    --card-foreground: 45 24% 91%;
+
+    --popover: 40 8% 14%;
+    --popover-foreground: 45 24% 91%;
+
+    --primary: 72 14% 62%;
+    --primary-foreground: 40 10% 12%;
+
+    --secondary: 40 6% 20%;
+    --secondary-foreground: 45 24% 91%;
+
+    --muted: 40 6% 20%;
+    --muted-foreground: 45 10% 64%;
+
+    --accent: 40 7% 23%;
+    --accent-foreground: 45 24% 91%;
+
+    --destructive: 4 50% 45%;
+    --destructive-foreground: 48 40% 97%;
+
+    --border: 40 6% 23%;
+    --input: 40 6% 23%;
+    --ring: 72 14% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Hide scrollbar for clean planner/calendar views */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

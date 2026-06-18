@@ -1,51 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "useDefineForClassFields": true,
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "baseUrl": "src",
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
     "paths": {
-      /* API */
-      "@apis/*": ["./apis/*"],
-      /* 아이콘, 이미지 등 */
-      "@assets/*": ["./assets/*"],
-      /* 전역 상수 */
-      "@constants/*": ["./constants/*"],
-      /* 공통 컴포넌트 */
-      "@components/*": ["./components/*"],
-      /* 기능별로 코드를 분리하는 경우 사용 */
-      "@features/*": ["./features/*"],
-      /* 공통 hook */
-      "@hooks/*": ["./hooks/*"],
-      /* 전역 라이브러리 */
-      "@lib/*": ["./lib/*"],
-      /* 전역 쿼리 object */
-      "@queries/*": ["./queries/*"],
-      /* 공통 스타일시트 */
-      "@styles/*": ["./styles/*"],
-      /* 공통 유틸리티 함수 */
-      "@utils/*": ["./utils/*"],
-      /* 기타 src 내 코드에 접근하는 경우 */
-      "@/*": ["./*"]
-    },
-
-    "types": ["unplugin-icons/types/react", "cypress"]
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src", "vite.config.ts", "cypress"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

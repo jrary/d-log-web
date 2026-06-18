@@ -1,0 +1,63 @@
+import { dateKey } from "./utils"
+
+export const DAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"]
+export const DAY_LABELS_MON = ["월", "화", "수", "목", "금", "토", "일"]
+
+export function addDays(base: Date, days: number) {
+  const d = new Date(base)
+  d.setDate(d.getDate() + days)
+  return d
+}
+
+/** Format minutes-from-midnight as HH:mm */
+export function minutesToLabel(minutes: number) {
+  const h = Math.floor(minutes / 60)
+  const m = minutes % 60
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`
+}
+
+/** Monday-based week containing `date`, returned as 7 Date objects (Mon..Sun). */
+export function weekDays(date: Date): Date[] {
+  const day = date.getDay() // 0 = Sun
+  const mondayOffset = day === 0 ? -6 : 1 - day
+  const monday = addDays(date, mondayOffset)
+  return Array.from({ length: 7 }, (_, i) => addDays(monday, i))
+}
+
+/** Full month grid (weeks of 7), Sunday-first, padding with prev/next month days. */
+export function monthGrid(date: Date): Date[][] {
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const first = new Date(year, month, 1)
+  const startOffset = first.getDay() // 0 = Sun
+  const gridStart = addDays(first, -startOffset)
+  const weeks: Date[][] = []
+  for (let w = 0; w < 6; w++) {
+    const row: Date[] = []
+    for (let d = 0; d < 7; d++) {
+      row.push(addDays(gridStart, w * 7 + d))
+    }
+    weeks.push(row)
+  }
+  return weeks
+}
+
+/**
+ * Current consecutive-day streak ending today (or yesterday if today not yet done).
+ * `history` is a list of YYYY-MM-DD keys.
+ */
+export function currentStreak(history: string[], today = new Date()): number {
+  const set = new Set(history)
+  let streak = 0
+  // Allow the streak to count even if today is not yet checked.
+  let cursor = set.has(dateKey(today)) ? today : addDays(today, -1)
+  while (set.has(dateKey(cursor))) {
+    streak += 1
+    cursor = addDays(cursor, -1)
+  }
+  return streak
+}
+
+export function isSameDay(a: Date, b: Date) {
+  return dateKey(a) === dateKey(b)
+}
