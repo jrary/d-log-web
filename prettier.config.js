@@ -1,0 +1,12 @@
+export default {
+  semi: false,
+  tabWidth: 2,
+  useTabs: false,
+  printWidth: 80,
+  endOfLine: "lf",
+  bracketSameLine: true,
+  jsxSingleQuote: false,
+  singleQuote: false,
+
+  plugins: ["prettier-plugin-packagejson"],
+}

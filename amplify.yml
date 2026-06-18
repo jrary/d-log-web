@@ -1,0 +1,31 @@
+version: 0.2
+frontend:
+  phases:
+    install:
+      runtime-versions:
+        nodejs: 20
+    preBuild:
+      commands:
+        - echo Installing source PNPM dependencies...
+        - corepack enable pnpm # enable pnpm
+        - pnpm -v
+        - pnpm install --no-frozen-lockfile # install deps
+    build:
+      commands:
+        # 환경변수 설정
+        - echo "VITE_SENTRY_DSN=$VITE_SENTRY_DSN" >> .env # Sentry DSN
+        - echo "VITE_SENTRY_AUTH_TOKEN=$VITE_SENTRY_AUTH_TOKEN" >> .env # Sentry Auth Token
+        - echo "VITE_CHANNEL_TALK_PLUGIN_KEY=$VITE_CHANNEL_TALK_PLUGIN_KEY" >> .env # Channel Talk Plugin Key
+
+        # 브랜치 별 빌드 모드 설정
+        - if [ "${AWS_BRANCH}" = "main" ]; then export ENV=production; fi
+        - if [ "${AWS_BRANCH}" = "stage" ]; then export ENV=stage; fi
+        - if [ "${AWS_BRANCH}" = "dev" ]; then export ENV=development; fi
+        - pnpm build --mode $ENV
+  artifacts:
+    baseDirectory: dist
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*

@@ -1,0 +1,8 @@
+# lock file도 무시
+pnpm-lock.yaml
+
+# codegen 시 생성되는 코드
+**/apis/*
+
+# old
+old

@@ -1,0 +1,9 @@
+{
+  "short_name": "그릿지 워커",
+  "name": "그릿지 워커",
+  "icons": [{}],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
